@@ -1,3 +1,29 @@
+header {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.btn:focus {
+  outline: outset thin;
+}
+
+.jumbotron {
+  margin-top: 2%;
+  box-shadow: 2px 2px 2px gray;
+}
+
+.btn:active {
+  outline: none;
+  text-decoration: none;
+  box-shadow: none;
+}
+
 .hide {
   display: none;
+}
+
+@media (min-width: 600px) {
+  .form-group {
+    margin: 0 auto;
+    width: 50%;
+  }
 }
