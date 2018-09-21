@@ -2,13 +2,15 @@
 <html>
   <head>
     <title>MintChipSum</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-
+    <canvas id="dottedBackground">
+    </canvas>
     <div class="container-fluid">
-      <div class="jumbotron">
+      <div class="banner">
         <header>
           <h1 class="text-center">MintChipSum</h1>
           <p class="text-center">Looking for ice cream inspiration? You're in luck.</p>
@@ -23,18 +25,19 @@
           </div>
         </form>
 
-        <div id="loremIpsum">
+        <div class="hide" id="loremIpsum">
         </div>
-
-        <button type="button" class="btn btn-default hide">More Scoops, Please!</button>
+        <div class="text-center">
+          <button type="button" class="btn btn-default hide">More Scoops, Please!</button>
+        </div>
       </main>
     </div>
 
-  </body>
-  <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-  <script src="app.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script src="app.js"></script>
 
+  </body>
 </html>

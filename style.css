@@ -1,19 +1,41 @@
-header {
+
+body {
   font-family: 'Quicksand', sans-serif;
 }
 
-.btn:focus {
-  outline: outset thin;
+header h1 {
+  font-size: 4em;
 }
 
-.jumbotron {
+header p {
+  font-size: 1.25em;
+}
+
+canvas {
+  display: none;
+}
+
+.banner {
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+  margin-bottom: 10%;
+  padding: 1%;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+/*.jumbotron {
   margin-top: 2%;
   box-shadow: 2px 2px 2px gray;
-}
+}*/
 
-.btn:active {
+div .input-lg:focus {
   outline: none;
-  text-decoration: none;
+  border: none;
   box-shadow: none;
 }
 
@@ -21,9 +43,26 @@ header {
   display: none;
 }
 
+.btn {
+  margin: 4% 0;
+  border-radius: 4px;
+}
+
+.btn:focus {
+  outline: outset thin;
+}
+
+#loremIpsum {
+  background: white;
+  width: 75%;
+  margin: 1% auto;
+  padding: 1%;
+  border-radius: 10px;
+}
+
 @media (min-width: 600px) {
   .form-group {
     margin: 0 auto;
-    width: 50%;
+    width: 40%;
   }
 }
