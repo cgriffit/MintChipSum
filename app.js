@@ -1,4 +1,30 @@
 $(document).ready(function() {
+  //canvas setup
+  let canvas = document.querySelector("#dottedBackground");
+  //check if browser supports canvas element
+  if (canvas.getContext) {
+    let cntxt = canvas.getContext("2d");
+    //add polka dots
+    for (let x = 25; x <= canvas.width; x += 100) {
+      for (let y = 25; y <= canvas.height; y += 75) {
+          let radius = 15;
+          let startAngle = 0;
+          let endAngle = 360; //?
+          //draw circle
+          cntxt.beginPath();
+          cntxt.arc(x,y,radius,startAngle,endAngle);
+          cntxt.fill();
+      }
+    }
+    //set background to dots and mint green color
+    document.body.style.backgroundImage = "url(" + canvas.toDataURL() + ")";
+    document.body.style.backgroundColor = "#A4FFDE";
+
+  } else {
+    //behavior if browser does not support canvas element
+    document.body.style.backgroundColor = "#A4FFDE";
+  }
+
   //create an array of strings associated with ice cream
   let icStrings = ["mint chip", "soft serve", "cookie dough", "waffle cone", "strawberry",
   "banana split", "gelato", "a la mode", "Ben & Jerry's", "Dairy Queen", "sundae",
@@ -33,13 +59,13 @@ $(document).ready(function() {
           }
 
         }
-        //display lorem ipsum
+        //display lorem ipsum and styles
         $("#loremIpsum").append("<p>" + myIpsum + ".</p>");
+        $("#loremIpsum").removeClass("hide");
       }
 
       //display button for new lorem ipsum and give it focus
       $("button").removeClass("hide").focus();
-
       //stop form from submitting
       event.preventDefault();
     }
@@ -49,6 +75,8 @@ $(document).ready(function() {
   $("button").on("click", function() {
     //clear out listed lorem ipsum
     $("#loremIpsum").empty();
+    //hide lorem ipsum styling
+    $("#loremIpsum").addClass("hide");
     //clear listed number and give field focus
     $("#numParagraphs").val("").focus();
     //hide button for new lorem ipsum
