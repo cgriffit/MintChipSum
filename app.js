@@ -65,14 +65,14 @@ $(document).ready(function() {
       }
 
       //display button for new lorem ipsum and give it focus
-      $("button").removeClass("hide").focus();
+      $("button").removeClass("hide");
       //stop form from submitting
       event.preventDefault();
     }
   });
 
-  //on button press
-  $("button").on("click", function() {
+  //on More Scoops button press
+  $("#moreIpsumBtn").on("click", function() {
     //clear out listed lorem ipsum
     $("#loremIpsum").empty();
     //hide lorem ipsum styling
@@ -81,6 +81,13 @@ $(document).ready(function() {
     $("#numParagraphs").val("").focus();
     //hide button for new lorem ipsum
     $("button").addClass("hide");
+  });
+
+  //on copy button press
+  $("#copyBtn").on("click", function() {
+    //copy all generated lorem ipsum
+    $("#loremIpsum").select();
+    document.execCommand("copy");
   });
 
 });
