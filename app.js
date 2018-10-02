@@ -62,6 +62,7 @@ $(document).ready(function() {
         //display lorem ipsum and styles
         $("#loremIpsum").append("<p>" + myIpsum + ".</p>");
         $("#loremIpsum").removeClass("hide");
+
       }
 
       //display button for new lorem ipsum and give it focus
@@ -83,11 +84,22 @@ $(document).ready(function() {
     $("button").addClass("hide");
   });
 
+
   //on copy button press
   $("#copyBtn").on("click", function() {
-    //copy all generated lorem ipsum
-    $("#loremIpsum").select();
+    //create temporary textarea (input element) to allow copy to clipboard
+    let textarea = document.createElement("textarea");
+    //add id to textarea
+    textarea.id = "tempInputElement";
+    //append textarea to body
+    document.body.appendChild(textarea);
+    //give textarea the value of the lorem ipsum text
+    textarea.value = document.getElementById("loremIpsum").innerText;
+    //copy textarea text to clipboard
+    document.getElementById("tempInputElement").select();
     document.execCommand("copy");
+    //remove temporary textarea from body
+    document.body.removeChild(textarea);
   });
 
 });
