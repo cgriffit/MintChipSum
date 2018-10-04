@@ -53,11 +53,17 @@ div .input-lg:focus {
 }
 
 #loremIpsum {
-  background: white;
+  background-color: white;
   width: 75%;
   margin: 1% auto;
   padding: 1%;
   border-radius: 10px;
+}
+
+#copiedNotice {
+  background-color: #7B68EE;
+  padding: 1%;
+  margin-left: 4%;
 }
 
 @media (min-width: 600px) {
