@@ -48,7 +48,7 @@ $(document).ready(function() {
           }
           //create new sentence after 10 strings
           else if (j % 10 === 0) {
-            //break paragraph after four sentenceså
+            //break paragraph after four sentences
             if (j === 40) {
               break;
             }
@@ -65,8 +65,10 @@ $(document).ready(function() {
 
       }
 
-      //display button for new lorem ipsum and give it focus
+      //display buttons
       $("button").removeClass("hide");
+      //give copy button focus
+      $("#copyBtn").focus();
       //stop form from submitting
       event.preventDefault();
     }
@@ -100,6 +102,27 @@ $(document).ready(function() {
     document.execCommand("copy");
     //remove temporary textarea from body
     document.body.removeChild(textarea);
+
+    //create temporary span to notify user that text has been copied
+    let newSpan = document.createElement("span");
+    //add id to span
+    newSpan.id = "copiedNotice";
+    //add text to span
+    let newSpanText = document.createTextNode("Copied!");
+    newSpan.appendChild(newSpanText);
+    //add span to row of buttons
+    $(".buttons").append(newSpan);
+
+    //fade out span
+    setTimeout(function() {
+      $("#copiedNotice").fadeOut("slow");
+    }, 1000)
+
+    //remove span
+    setTimeout(function() {
+      $("#copiedNotice").remove();
+    }, 10000);
+
   });
 
 });
