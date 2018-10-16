@@ -1,27 +1,63 @@
 $(document).ready(function() {
-  //canvas setup
-  let canvas = document.querySelector("#dottedBackground");
-  //check if browser supports canvas element
-  if (canvas.getContext) {
+  function addPolkaDots() {
     let cntxt = canvas.getContext("2d");
     //add polka dots
     for (let x = 25; x <= canvas.width; x += 100) {
       for (let y = 25; y <= canvas.height; y += 75) {
           let radius = 15;
-          let startAngle = 0;
-          let endAngle = 360; //?
           //draw circle
           cntxt.beginPath();
-          cntxt.arc(x,y,radius,startAngle,endAngle);
+          cntxt.arc(x,y,radius,0,Math.PI * 2);
           cntxt.fill();
       }
     }
     //set background to dots and mint green color
     document.body.style.backgroundImage = "url(" + canvas.toDataURL() + ")";
     document.body.style.backgroundColor = "#A4FFDE";
+  }
 
+  //generate specified number of paragraphs of lorem ipsum
+  function generateLoremIpsum(numOfParagraphs) {
+    for (let i = 0; i < numOfParagraphs; i++) {
+      let myIpsum = "";
+      for (let j = 0; j < Math.floor((Math.random() * 100) + 40); j++) {
+        let randomWord = icStrings[ Math.floor(Math.random() * icStrings.length)];
+        //capitalize first letter of paragraph
+        if (j === 0) {
+          myIpsum = randomWord.charAt(0).toUpperCase() + randomWord.slice(1);
+        }
+        //create new sentence after 10 strings
+        else if (j % 10 === 0) {
+          //break paragraph after four sentences
+          if (j === 40) {
+            break;
+          }
+          myIpsum += ". "  + randomWord.charAt(0).toUpperCase() + randomWord.slice(1);
+        //add random string
+        } else {
+            myIpsum += " " + randomWord;
+        }
+      }
+      //display lorem ipsum and styles
+      $("#loremIpsum").append("<p>" + myIpsum + ".</p>");
+      $("#loremIpsum").removeClass("hide");
+    }
+
+    //display buttons
+    $("button").removeClass("hide");
+    //give copy button focus
+    $("#copyBtn").focus();
+    //stop form from submitting
+    event.preventDefault();
+  }
+
+  //canvas setup
+  let canvas = document.querySelector("#dottedBackground");
+  //check if browser supports canvas element
+  if (canvas.getContext) {
+    addPolkaDots();
   } else {
-    //behavior if browser does not support canvas element
+    //if browser does not support canvas element
     document.body.style.backgroundColor = "#A4FFDE";
   }
 
@@ -29,48 +65,22 @@ $(document).ready(function() {
   let icStrings = ["mint chip", "soft serve", "cookie dough", "waffle cone", "strawberry",
   "banana split", "gelato", "a la mode", "Ben & Jerry's", "Dairy Queen", "sundae",
   "cookies and cream", "rocky road", "peanut butter cup", "frozen yogurt", "pralines and cream", "vanilla",
-  "chocolate", "super fudge brownie", "bunny tracks", "salted caramel", "hot fudge",
-  "sprinkles", "birthday cake"];
+  "chocolate", "super fudge brownie", "bunny tracks", "Baskin Robbins", "salted caramel", "hot fudge",
+  "sprinkles", "coffee", "butter brickle", "peppermint", "birthday cake", "butterscotch"];
 
   //on enter keypress
   $("input[type='number']").keypress(function(event) {
     if(event.which === 13) {
       let numOfParagraphs = $("#numParagraphs").val();
 
-      //generate specified number of paragraphs of lorem ipsum
-      for (let i = 0; i < numOfParagraphs; i++) {
-        let myIpsum = "";
-        for (let j = 0; j < Math.floor((Math.random() * 100) + 40); j++) {
-          let randomWord = icStrings[ Math.floor(Math.random() * icStrings.length)];
-          //capitalize first letter of paragraph
-          if (j === 0) {
-            myIpsum = randomWord.charAt(0).toUpperCase() + randomWord.slice(1);
-          }
-          //create new sentence after 10 strings
-          else if (j % 10 === 0) {
-            //break paragraph after four sentences
-            if (j === 40) {
-              break;
-            }
-            myIpsum += ". "  + randomWord.charAt(0).toUpperCase() + randomWord.slice(1);
-          //add random string
-          } else {
-              myIpsum += " " + randomWord;
-          }
-
-        }
-        //display lorem ipsum and styles
-        $("#loremIpsum").append("<p>" + myIpsum + ".</p>");
-        $("#loremIpsum").removeClass("hide");
-
+      //check to make sure number was entered
+      let regex = /\d+/;
+      let matched = numOfParagraphs.match(regex);
+      if (matched) {
+        generateLoremIpsum(numOfParagraphs);
+      } else {
+        alert("Please enter a number.");
       }
-
-      //display buttons
-      $("button").removeClass("hide");
-      //give copy button focus
-      $("#copyBtn").focus();
-      //stop form from submitting
-      event.preventDefault();
     }
   });
 
@@ -111,17 +121,20 @@ $(document).ready(function() {
     let newSpanText = document.createTextNode("Copied!");
     newSpan.appendChild(newSpanText);
     //add span to row of buttons
-    $(".buttons").append(newSpan);
+    $("#buttons").append(newSpan);
 
     //fade out span
     setTimeout(function() {
       $("#copiedNotice").fadeOut("slow");
-    }, 1000)
+    }, 500)
 
     //remove span
     setTimeout(function() {
       $("#copiedNotice").remove();
-    }, 10000);
+    }, 5000);
+
+    //add focus to more lorem ipsum button
+    $("#moreIpsumBtn").focus();
 
   });
 
